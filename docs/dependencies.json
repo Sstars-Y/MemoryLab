@@ -1,0 +1,291 @@
+{
+  "python": "3.12.15 (main, Oct  9 2026, 15:21:55) [MSC v.1944 64 bit (AMD64)]",
+  "sqlite": "3.53.1",
+  "packages": [
+    {
+      "name": "annotated-doc",
+      "version": "0.0.6",
+      "license": "MIT"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT"
+    },
+    {
+      "name": "anyio",
+      "version": "4.16.0",
+      "license": "MIT"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "click",
+      "version": "8.5.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "license": "not declared"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.162.7",
+      "license": "MIT"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.10",
+      "license": "MIT"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license": "MIT"
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.8.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "huggingface_hub",
+      "version": "1.33.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "license": "MIT"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "license": "not declared"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.3.0",
+      "license": "not declared"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "license": "not declared"
+    },
+    {
+      "name": "memorylab",
+      "version": "0.1.0",
+      "license": "not declared"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "license": "BSD"
+    },
+    {
+      "name": "mutagen",
+      "version": "1.48.1",
+      "license": "GPL-2.0-or-later"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.28.0",
+      "license": "MIT"
+    },
+    {
+      "name": "networkx",
+      "version": "3.7",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.4",
+      "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.2",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "license": "Apache-2.0 OR BSD-2-Clause"
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0",
+      "license": "MIT-CMU"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "license": "MIT"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.3",
+      "license": "MIT"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.4",
+      "license": "MIT"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0",
+      "license": "BSD-2-Clause"
+    },
+    {
+      "name": "pytest",
+      "version": "9.2.0",
+      "license": "MIT"
+    },
+    {
+      "name": "pytest-asyncio",
+      "version": "1.5.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "license": "MIT"
+    },
+    {
+      "name": "regex",
+      "version": "2026.11.9",
+      "license": "Apache-2.0 AND CNRI-Python"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "license": "MIT"
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "license": "not declared"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "license": "Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers.\n All rights reserved.\n\n Redistribution and use in source and binary forms, with or without\n modification, are permit"
+    },
+    {
+      "name": "sentence-transformers",
+      "version": "5.7.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.1",
+      "license": "MIT"
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "license": "ISC License"
+    },
+    {
+      "name": "starlette",
+      "version": "1.10.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "license": "BSD"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.8.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3",
+      "license": "not declared"
+    },
+    {
+      "name": "torch",
+      "version": "2.15.0",
+      "license": "Apache-2.0 AND Apache-2.0 WITH LLVM-exception AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND ISC AND MIT AND Zlib"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "license": "MPL-2.0 AND MIT"
+    },
+    {
+      "name": "transformers",
+      "version": "5.23.0",
+      "license": "Apache 2.0 License"
+    },
+    {
+      "name": "typer",
+      "version": "0.29.1",
+      "license": "MIT"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.5",
+      "license": "MIT"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0",
+      "license": "BSD-3-Clause"
+    }
+  ]
+}

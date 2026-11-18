@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "memorylab"
+version = "0.1.0"
+description = "Local, source-grounded conversational memory laboratory"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "httpx>=0.28,<1",
+  "numpy>=2.2,<3", "pillow>=11,<13", "mutagen>=1.47,<2"
+]
+
+[project.optional-dependencies]
+embedding = ["sentence-transformers>=3.4,<6", "huggingface-hub>=0.28,<2"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "pytest-asyncio>=0.25,<2"]
+
+[project.scripts]
+memorylab = "memory_lab.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["memory_core", "memory_lab"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

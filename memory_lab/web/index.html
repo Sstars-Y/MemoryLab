@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MemoryLab · 长期记忆实验</title><link rel="stylesheet" href="/web/style.css"></head>
+<body>
+<aside>
+  <div class="brand"><span class="mark">M</span><div><strong>MemoryLab</strong><small>一起经历，有据可忆</small></div></div>
+  <button id="new-session" class="primary">＋ 新建对话</button>
+  <nav aria-label="主要功能"><button data-view="chat" class="selected">对话</button><button data-view="search">历史与来源</button><button data-view="episodes">经历整理</button><button data-view="recycle">回收站</button><button data-view="data">导出与快照</button><button data-view="settings">设置</button></nav>
+  <div class="session-title">最近会话</div><div id="sessions"></div>
+  <div class="sidebar-bottom"><span id="provider-label">模拟模型</span><button id="quit" class="quiet">退出本地服务</button></div>
+</aside>
+<main>
+  <header><div><p class="eyebrow">LOCAL MEMORY LAB</p><h1 id="view-title">对话</h1></div><div class="save-control"><span id="save-label">保存已开启</span><button id="recording" role="switch" aria-checked="true">暂停保存</button></div></header>
+  <div class="notice" id="privacy">实验模式会保存双方完整消息及实际发送的附件。请勿发送密钥。暂停期间仅临时交流，重新开启后不补存。</div>
+  <div id="status" role="status" aria-live="polite"></div>
+  <section id="view-chat" class="view">
+    <div id="conversation" aria-live="polite"><div class="empty"><h2>从这一次交流开始</h2><p>原话会保留，回忆可以核对。先说点什么吧。</p></div></div>
+    <button id="older" class="quiet hidden">加载更早记录</button>
+    <div id="draft" class="draft hidden"></div>
+    <form id="composer"><div id="pending-files"></div><label class="sr-only" for="message">消息</label><textarea id="message" rows="3" placeholder="输入消息，Shift + Enter 换行"></textarea><div class="composer-footer"><label class="file-button">＋ 图片 / 语音<input id="files" type="file" accept=".jpg,.jpeg,.png,.webp,.wav,.mp3,.m4a,.ogg" multiple></label><small id="send-status">模型完整回答后保存；停止会丢弃草稿。</small><button id="stop" type="button" class="hidden">停止生成</button><button id="send" type="submit" class="primary">发送 ↑</button></div></form>
+  </section>
+  <section id="view-search" class="view hidden"><form id="search-form" class="panel"><label>关键词或完整消息编号<input id="query" placeholder="原话、名字、编号……"></label><div class="row"><label>开始日期<input id="since" type="date"></label><label>结束日期<input id="until" type="date"></label><label>说话者<select id="role"><option value="">双方</option><option value="user">用户</option><option value="assistant">助手</option></select></label></div><label class="check"><input id="semantic" type="checkbox">同时按意思查找（需启用本地模型）</label><button class="primary">搜索历史</button></form><div id="search-results"></div><button id="more-search" class="hidden">下一页</button></section>
+  <section id="view-episodes" class="view hidden"><div class="section-heading"><p>经历由来源整理，不能代替原话。</p><button id="retry-jobs">重试失败任务</button></div><div id="episodes"></div></section>
+  <section id="view-recycle" class="view hidden"><p>所选消息与附件退出日常记忆后保留 7 天。其他对话中独立提到的内容仍可能被回忆。</p><button id="clear-recycle" class="danger">清空回收站…</button><div id="recycle-list"></div></section>
+  <section id="view-data" class="view hidden"><div class="grid"><form id="export-form" class="panel"><h2>导出当前会话</h2><p>供人阅读的副本；自行复制出去的文件不受自动删除管理。</p><label class="check"><input id="include-media" type="checkbox">包含附件原文件</label><label class="check"><input id="include-persona" type="checkbox">包含当前人格阅读版</label><button class="primary">生成导出</button></form><div class="panel"><h2>本人格快照</h2><p>包括人格源、记忆与受管媒体。恢复前校验文件及当前删除状态；不包含 users/。</p><button id="snapshot" class="primary">创建手工快照</button></div></div><div id="products"></div></section>
+  <section id="view-settings" class="view hidden"><div class="grid"><form id="persona-form" class="panel"><h2>固定人格</h2><p id="persona-id" class="mono"></p><label>名称<input id="persona-name" maxlength="80" required></label><label>设定<textarea id="instructions" rows="6" maxlength="16000"></textarea></label><button class="primary">保存人格设定</button></form><form id="config-form" class="panel connection-panel">
+  <h2>模型连接</h2>
+  <div id="connection-status" class="connection-status" role="status" aria-live="polite">当前使用模拟模型</div>
+  <label>运行模式<select id="mode"><option value="fake">模拟模型 · 验证保存与记忆流程</option><option value="remote">兼容聊天接口 · 本机或远程服务</option></select></label>
+  <fieldset id="remote-fields">
+    <legend class="sr-only">聊天接口设置</legend>
+    <label for="base_url">API 基址</label>
+    <input id="base_url" type="url" placeholder="https://服务地址/v1" spellcheck="false" autocomplete="off" aria-describedby="base-help endpoint-preview">
+    <p id="base-help" class="field-help">填写服务商提供的 API 基址，通常以 /v1 结尾。本机服务可用 http://127.0.0.1:端口/v1。粘贴完整聊天接口地址时会自动去掉 /chat/completions。</p>
+    <p id="endpoint-preview" class="mono"></p>
+    <label for="api_key">API 密钥 · 仅本次运行有效</label>
+    <div class="secret-input"><input id="api_key" type="password" autocomplete="off" spellcheck="false" aria-describedby="key-status"><button id="toggle-key" type="button" aria-pressed="false">显示</button></div>
+    <p id="key-status" class="field-help">未设置密钥；本机无认证服务可留空。不要填写 Bearer 前缀。</p>
+    <div class="row model-heading"><label for="model">聊天模型</label><button id="load-models" type="button">获取模型列表</button></div>
+    <input id="model" list="model-options" placeholder="填写完整模型 ID，或从列表选择" autocomplete="off" spellcheck="false">
+    <datalist id="model-options"></datalist>
+    <p id="models-status" class="field-help" role="status">获取列表只检查模型目录；能否回复需单独测试。服务无模型列表时可手动填写。</p>
+    <details class="advanced-settings"><summary>高级设置 · 上下文、整理模型与媒体</summary>
+      <label>上下文上限（token）<input id="context_limit" type="number" min="2048" max="2000000" step="1" value="8192"></label>
+      <label>最大输出（token）<input id="output_limit" type="number" min="128" max="8192" step="1" value="1024"></label>
+      <label>单次请求最长等待（秒）<input id="request_timeout" type="number" min="30" max="600" step="1" value="180"></label>
+      <p class="field-help">默认 180 秒，可设为 30–600 秒。每个模型请求独立计时，包含排队、推理与正文传输；单独设置整理模型时，测试会依次请求两个模型。超时不会自动重复调用。</p>
+      <label>思考模式<select id="thinking_mode" aria-describedby="thinking-help"><option value="default">使用服务默认</option><option value="off">关闭思考 · 直接回复</option><option value="on">开启思考 · 可能等待更久</option></select></label>
+      <p id="thinking-help" class="field-help">此开关适用于硅基流动的 Qwen3.5 系列，其他服务不发送该扩展参数。该系列的启用前测试会关闭思考，只验证基础回复；日常聊天及整理使用这里的选择。</p>
+      <p class="field-help">按服务实际限制填写；输出最多为上下文的一半，且不超过 8192。这里不会自动识别模型容量。</p>
+      <label>经历整理模型（留空使用聊天模型）<input id="summary_model" list="model-options" spellcheck="false"></label>
+      <label class="check"><input id="vision" type="checkbox">聊天模型支持原始图片输入</label>
+      <label class="check"><input id="audio" type="checkbox">聊天模型支持 WAV / MP3 原始输入</label>
+      <label>图片描述模型（可选）<input id="vision_model" list="model-options" spellcheck="false"></label>
+      <label>语音转写模型（可选）<input id="asr_model" list="model-options" spellcheck="false"></label>
+      <p class="field-help">回复测试仅验证文字流式聊天，不验证媒体能力；请按服务实际支持情况勾选。</p>
+    </details>
+  </fieldset>
+  <p id="probe-help" class="field-help">测试或启用会发送固定的简短测试文本，不发送历史、人格或附件；远程服务可能计费。单独配置整理模型时也会测试该模型。</p>
+  <div class="connection-actions"><button id="test-config" type="button">测试回复</button><button id="save-config" class="primary" type="submit">保存并启用</button><button id="clear-key" type="button" class="quiet">清除密钥并停用</button></div>
+  <p id="config-feedback" class="config-feedback" role="status" aria-live="polite">地址、模型和参数会保存；密钥仅驻留内存。重启后回到模拟模式。</p>
+</form></div><div class="panel"><h2>本地检索与手工资料</h2><p id="embedding-status"></p><button id="embedding">加载已准备的 BGE-M3（CPU）</button><button id="open-users">打开 users/ 手工目录</button><p class="muted">users/ 不读取、不扫描、不索引、不导出、不备份，由你手工维护。模型准备命令见 README。</p><pre id="diagnostics"></pre></div></section>
+</main>
+<dialog id="detail"><div class="dialog-head"><h2 id="detail-title">详情</h2><button id="close-detail" aria-label="关闭">×</button></div><div id="detail-body"></div></dialog>
+<script src="/web/app.js" defer></script></body></html>

@@ -1,0 +1,29 @@
+{
+  "format_version": 1,
+  "project": "MemoryLab",
+  "recorded_date": "2026-11-14",
+  "implementation_origin": "Independent implementation recorded in docs/integration.md; no QQBot source files were imported into this repository.",
+  "copied_source_files": [],
+  "copied_source_commits": [],
+  "copied_source_license_requirements": [],
+  "design_reference": "docs/handoff.md",
+  "runtime_dependencies": {
+    "declaration": "pyproject.toml",
+    "locks": ["uv.lock", "requirements.lock"],
+    "preparation_script": "scripts/prepare_memory_lab.py"
+  },
+  "embedding": {
+    "model": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "local_preparation_manifest": ".local/caches/models/bge-m3/model-lock.json",
+    "packaged_with_source": false
+  },
+  "acceptance_source_identity": "New acceptance reports contain SHA-256 fingerprints of explicitly selected source directories; they identify working files rather than assuming a release commit.",
+  "excluded_from_source_delivery": [
+    "API credentials",
+    "persona and conversation data",
+    "users/ manual files",
+    "runtime state, caches and model weights",
+    "verification and benchmark databases"
+  ]
+}
